@@ -26,7 +26,7 @@ public class Category {
         this.expenses = expenses;
     }
 
-    public List<Expense> getExpenses() {
-        return expenses;
-    }
+//    public List<Expense> getExpenses() {
+//        return expenses;
+//    }
 }

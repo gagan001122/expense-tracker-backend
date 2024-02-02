@@ -14,8 +14,8 @@ import java.util.Optional;
 @Repository
 public interface IGroupRepository extends CrudRepository<Group, Integer> {
     Optional<Group> getMembersById(int groupId);
-    @Modifying
-    @Transactional
-    @Query("UPDATE User u SET u.group = :group WHERE u.id IN :userIds")
-    void addUsersToGroup(@Param("group") Group group, @Param("userIds") List<Integer> userIds);
+
+    @Query("SELECT ug.group FROM UserGroup ug WHERE ug.user.id = :userId")
+    List<Group> findGroupsByUserId(@Param("userId") Integer userId);
+
 }

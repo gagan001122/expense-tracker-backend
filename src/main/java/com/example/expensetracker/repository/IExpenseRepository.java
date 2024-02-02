@@ -8,5 +8,7 @@ import java.util.List;
 
 @Repository
 public interface IExpenseRepository extends CrudRepository<Expense, Integer> {
-    List<Expense> getExpenseByUserId(int i);
+    List<Expense> getByUserIdAndGroupIsNull(int id);
+
+    List<Expense> getExpenseByGroupId(int id);
 }

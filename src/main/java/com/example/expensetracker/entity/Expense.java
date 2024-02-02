@@ -1,11 +1,7 @@
 package com.example.expensetracker.entity;
-
 import jakarta.persistence.*;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Date;
-
 @Entity
 @Table(name="expenses")
 public class Expense {
@@ -13,8 +9,9 @@ public class Expense {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
     private BigDecimal amount;
-
-    private String category;
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
     @Column(name = "expense_date")
     private LocalDate date;
 
@@ -22,6 +19,10 @@ public class Expense {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "group_id")
+    private Group group;
 
     @PrePersist
     protected void onCreate() {
@@ -34,14 +35,6 @@ public class Expense {
 
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
     }
 
     public LocalDate getDate() {
@@ -62,5 +55,26 @@ public class Expense {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+
+    public void setGroup(Group group) {
+        this.group = group;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public Category getCategory() {
+        return category;
     }
 }
